@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index of /Adialamsyahardi</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #000000;
+            --link-color: #0000EE;
+            --link-visited: #551A8B;
+            --link-hover: #0066FF;
+            --button-bg: #f0f0f0;
+            --button-border: #999999;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --border-color: #444444;
+            --link-color: #6B9FFF;
+            --link-visited: #B794F4;
+            --link-hover: #8AB4FF;
+            --button-bg: #2a2a2a;
+            --button-border: #555555;
+        }
+
+        body {
+            font-family: monospace;
+            margin: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 13px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .controls {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .btn {
+            font-family: monospace;
+            font-size: 12px;
+            padding: 5px 10px;
+            background-color: var(--button-bg);
+            color: var(--text-color);
+            border: 1px solid var(--button-border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            text-shadow: 
+                0 0 5px rgba(0, 100, 255, 0.4),
+                0 0 10px rgba(0, 100, 255, 0.3),
+                0 0 15px rgba(0, 100, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: normal;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th {
+            text-align: left;
+            padding: 2px 10px 2px 2px;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: normal;
+            transition: border-color 0.3s ease;
+        }
+
+        td {
+            padding: 2px 10px 2px 2px;
+            white-space: nowrap;
+        }
+
+        td.name {
+            width: 50%;
+        }
+
+        td.modified {
+            width: 25%;
+        }
+
+        td.size {
+            width: 15%;
+        }
+
+        td.description {
+            width: 10%;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        a:visited {
+            color: var(--link-visited);
+        }
+
+        a:hover {
+            text-decoration: underline;
+            text-shadow: 
+                0 0 5px rgba(0, 100, 255, 0.4),
+                0 0 10px rgba(0, 100, 255, 0.3),
+                0 0 15px rgba(0, 100, 255, 0.2);
+            color: var(--link-hover);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+            transition: filter 0.3s ease;
+        }
+
+        [data-theme="dark"] .icon {
+            filter: invert(1) brightness(0.9);
+        }
+
+        .subdirectory {
+            display: none;
+        }
+
+        .subdirectory.show {
+            display: table-row;
+        }
+
+        .arrow {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+            transition: transform 0.2s ease, filter 0.3s ease;
+        }
+
+        .arrow.open {
+            transform: rotate(90deg);
+        }
+
+        tr.clickable {
+            cursor: pointer;
+        }
+
+        .indent {
+            padding-left: 27px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 10px 0;
+            transition: border-color 0.3s ease;
+        }
+
+        address {
+            font-style: normal;
+            font-size: 12px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        address.highlight {
+            background-color: rgba(0, 100, 255, 0.1);
+            padding: 8px;
+            border-left: 3px solid var(--link-hover);
+            text-shadow: 
+                0 0 3px rgba(0, 100, 255, 0.2),
+                0 0 6px rgba(0, 100, 255, 0.1);
+        }
+
+        [data-theme="dark"] address.highlight {
+            background-color: rgba(107, 159, 255, 0.15);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            width: 50%;
+            max-height: calc(100vh - 40px);
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            opacity: 0.95;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--button-bg);
+        }
+
+        .modal-title {
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .close-btn {
+            font-family: monospace;
+            font-size: 18px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            text-shadow: 
+                0 0 5px rgba(255, 50, 50, 0.6),
+                0 0 10px rgba(255, 50, 50, 0.4),
+                0 0 15px rgba(255, 50, 50, 0.3);
+            color: #ff3333;
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .modal-body h1 {
+            font-size: 16px;
+            margin-top: 0;
+        }
+
+        .modal-body h2 {
+            font-size: 14px;
+        }
+
+        .modal-body p {
+            margin: 10px 0;
+        }
+
+        /* Scrollbar styling for modal */
+        .modal-body::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: var(--button-bg);
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 5px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: var(--text-color);
+        }
+
+        /* Responsive modal */
+        @media (max-width: 1024px) {
+            .modal-content {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <button class="btn" id="langToggle" onclick="toggleLanguage()">🌐 ID</button>
+        <button class="btn" id="themeToggle" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+
+    <h1 id="pageTitle">Index of /Adialamsyahardi</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th class="name" data-lang-en="Name" data-lang-id="Nama">Name</th>
+                <th class="modified" data-lang-en="Last modified" data-lang-id="Terakhir diubah">Last modified</th>
+                <th class="size" data-lang-en="Size" data-lang-id="Ukuran">Size</th>
+                <th class="description" data-lang-en="Description" data-lang-id="Deskripsi">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="name">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M19 12H5M12 19l-7-7 7-7'/%3E%3C/svg%3E" class="icon" alt="[BACK]">
+                    <a href="../" data-lang-en="Parent Directory" data-lang-id="Direktori Induk">Parent Directory</a>
+                </td>
+                <td class="modified">-</td>
+                <td class="size">-</td>
+                <td class="description">&nbsp;</td>
+            </tr>
+            
+            <!--tr>
+                <td class="name">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M20 7h-9l-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z'/%3E%3C/svg%3E" class="icon" alt="[DIR]">
+                    <a href="#about" data-lang-en="about/" data-lang-id="tentang/">about/</a>
+                </td>
+                <td class="modified">2026-02-14 10:30</td>
+                <td class="size">-</td>
+                <td class="description">&nbsp;</td>
+            </tr-->
+
+            <tr class="clickable" onclick="toggleSubdirectory('portfolio')">
+                <td class="name">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E" class="icon arrow" id="arrow-portfolio" alt="[>]">
+                    <a href="#portfolio" data-lang-en="My Portfolio/" data-lang-id="Portofolio Saya/">My Portfolio/</a>
+                </td>
+                <td class="modified">2026-02-14 11:15</td>
+                <td class="size">-</td>
+                <td class="description">&nbsp;</td>
+            </tr>
+
+            <tr class="clickable" onclick="toggleSubdirectory('projects')">
+                <td class="name">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E" class="icon arrow" id="arrow-projects" alt="[>]">
+                    <a href="#projects" data-lang-en="My Projects/" data-lang-id="Projek Projek Saya/">My Projects/</a>
+                </td>
+                <td class="modified">2026-02-14 09:45</td>
+                <td class="size">-</td>
+                <td class="description">&nbsp;</td>
+            </tr>
+
+            <tr class="subdirectory" id="sub-projects-1">
+                <td class="name indent">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpath d='M14 2v6h6M10 13l2 2 4-4'/%3E%3C/svg%3E" class="icon" alt="[FILE]">
+                    <a href="https://github.com/adialamsyahardi/rfid-empres">Project E-Money & Presence for Islamic Boarding School.git</a>
+                </td>
+                <td class="modified">2026-02-10 14:22</td>
+                <td class="size">45K</td>
+                <td class="description" data-lang-en="This project builded With Laravel Framework" data-lang-id="Situs Portofolio">Portfolio Site</td>
+            </tr>
+
+            <tr class="subdirectory" id="sub-projects-2">
+                <td class="name indent">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%234B7BEC' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpath d='M14 2v6h6M12 18v-6M9 15l3 3 3-3'/%3E%3C/svg%3E" class="icon" alt="[JS]">
+                    <a href="https://github.com/adialamsyahardi?tab=repositories">my others project and interest, check at Adialamsyahardi.git</a>
+                </td>
+                <td class="modified">2026-02-12 16:30</td>
+                <td class="size">128K</td>
+                <td class="description" data-lang-en="Github Profile" data-lang-id="Profil Github">Github Profile</td>
+            </tr>
+
+            <!--tr class="subdirectory" id="sub-projects-3">
+                <td class="name indent">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23777BB3' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3Ctext x='7' y='16' font-size='10' fill='%23777BB3' font-weight='bold'%3EPHP%3C/text%3E%3C/svg%3E" class="icon" alt="[PHP]">
+                    <a href="#project3">api-backend.php</a>
+                </td>
+                <td class="modified">2026-02-11 10:15</td>
+                <td class="size">89K</td>
+                <td class="description" data-lang-en="REST API" data-lang-id="API REST">REST API</td>
+            </tr-->
+
+            <tr>
+                <td class="name">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M20 7h-9l-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z'/%3E%3C/svg%3E" class="icon" alt="[DIR]">
+                    <a href="#contact" data-lang-en="contact/" data-lang-id="kontak/">contact/</a>
+                </td>
+                <td class="modified">2026-02-13 08:00</td>
+                <td class="size">-</td>
+                <td class="description">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td class="name">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpath d='M14 2v6h6M16 13H8M16 17H8M10 9H8'/%3E%3C/svg%3E" class="icon" alt="[TXT]">
+                    <a href="#readme" onclick="openModal(); return false;">README.md</a>
+                </td>
+                <td class="modified">2026-02-14 12:00</td>
+                <td class="size">2.1K</td>
+                <td class="description">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr>
+    <address id="serverInfo">
+        Want to hire me 24/6? ( <a href="https://www.linkedin.com/in/adialamsyahardi" target="_blank">LinkedIn</a>, <a href="https://www.jobstreet.com" target="_blank">Jobstreet</a> ) Contact me at <a href="mailto:kontak@adialamsyahardi.id">kontak@adialamsyahardi.id</a> port 587
+    </address>
+
+    <!-- Modal for README.md -->
+    <div class="modal-overlay" id="readmeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">README.md</h3>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="readmeContent">
+                <h1>Lorem Ipsum</h1>
+                
+                <h2>What is Lorem Ipsum?</h2>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                
+                <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                
+                <h2>Why do we use it?</h2>
+                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                
+                <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                
+                <h2>Where does it come from?</h2>
+                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                
+                <p>Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                
+                <h2>The Standard Chunk</h2>
+                <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                
+                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                pageTitle: "Index of /portfolio",
+                serverInfo: 'Want to hire me 24/6? ( <a href="https://www.linkedin.com/in/adialamsyahardi" target="_blank">LinkedIn</a>, <a href="https://www.jobstreet.com" target="_blank">Jobstreet</a> ) Contact me at <a href="mailto:kontak@adialamsyahardi.id">kontak@adialamsyahardi.id</a> port 587'
+            },
+            id: {
+                pageTitle: "Indeks dari /portfolio",
+                serverInfo: 'Ingin mempekerjakan saya 24/6? ( <a href="https://www.linkedin.com/in/adialamsyahardi" target="_blank">LinkedIn</a>, <a href="https://www.jobstreet.com" target="_blank">Jobstreet</a> ) Hubungi saya di <a href="mailto:kontak@adialamsyahardi.id">kontak@adialamsyahardi.id</a> port 587'
+            }
+        };
+
+        // Get language from URL parameter or default to 'en'
+        function getLanguageFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('lang') || 'en';
+        }
+
+        // Set language in URL without reload
+        function setLanguageInURL(lang) {
+            const url = new URL(window.location);
+            url.searchParams.set('lang', lang);
+            window.history.pushState({}, '', url);
+        }
+
+        // Apply language to all elements
+        function applyLanguage(lang) {
+            // Update page title
+            document.getElementById('pageTitle').textContent = translations[lang].pageTitle;
+            
+            // Update server info (with HTML support for links)
+            document.getElementById('serverInfo').innerHTML = translations[lang].serverInfo;
+            
+            // Update all elements with data-lang attributes
+            document.querySelectorAll('[data-lang-en]').forEach(element => {
+                const text = element.getAttribute('data-lang-' + lang);
+                if (text) {
+                    element.textContent = text;
+                }
+            });
+
+            // Update button text
+            const langButton = document.getElementById('langToggle');
+            langButton.textContent = lang === 'en' ? '🌐 ID' : '🌐 EN';
+        }
+
+        // Toggle language
+        function toggleLanguage() {
+            const currentLang = getLanguageFromURL();
+            const newLang = currentLang === 'en' ? 'id' : 'en';
+            setLanguageInURL(newLang);
+            applyLanguage(newLang);
+        }
+
+        // Get theme from localStorage or default to 'light'
+        function getTheme() {
+            return localStorage.getItem('theme') || 'light';
+        }
+
+        // Set theme
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            
+            const themeButton = document.getElementById('themeToggle');
+            themeButton.textContent = theme === 'light' ? '🌙 Dark' : '☀️ Light';
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = getTheme();
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            setTheme(newTheme);
+        }
+
+        // Toggle subdirectory
+        function toggleSubdirectory(id) {
+            const arrow = document.getElementById('arrow-' + id);
+            const subdirs = document.querySelectorAll('[id^="sub-' + id + '-"]');
+            
+            arrow.classList.toggle('open');
+            
+            subdirs.forEach(subdir => {
+                subdir.classList.toggle('show');
+            });
+        }
+
+        // Open modal
+        function openModal() {
+            document.getElementById('readmeModal').classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('readmeModal').classList.remove('show');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('readmeModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Apply language from URL
+            const lang = getLanguageFromURL();
+            applyLanguage(lang);
+            
+            // Apply theme from localStorage
+            const theme = getTheme();
+            setTheme(theme);
+
+            // Add hover effect to contact link
+            const contactLinks = document.querySelectorAll('a[href="#contact"]');
+            const serverInfo = document.getElementById('serverInfo');
+            
+            contactLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    serverInfo.classList.add('highlight');
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    serverInfo.classList.remove('highlight');
+                });
+            });
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function() {
+            const lang = getLanguageFromURL();
+            applyLanguage(lang);
+        });
+    </script>
+</body>
+</html>
