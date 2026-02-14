@@ -316,6 +316,23 @@
                 width: 90%;
             }
         }
+
+        /* Gif Wrapper */
+        .gif-container {
+            margin-top: 70px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            width: 100%;
+        }
+
+        .gif-wrapper {
+            width: 200px; 
+            height: 0;
+            padding-bottom: 200px;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -366,6 +383,26 @@
                 <td class="description">&nbsp;</td>
             </tr>
 
+            <tr class="subdirectory" id="sub-portfolio-1">
+                <td class="name indent">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpath d='M14 2v6h6M10 13l2 2 4-4'/%3E%3C/svg%3E" class="icon" alt="[FILE]">
+                    <a href="https://porto.adialamsyahardi.id/">me as an IT guy</a>
+                </td>
+                <td class="modified">2026-02-10 13:03</td>
+                <td class="size">76K</td>
+                <td class="description" data-lang-en="This page providing my experience as an IT guy" data-lang-id="Halaman ini memuat pengalaman saya saat di dunia IT">Portfolio Site</td>
+            </tr>
+
+            <tr class="subdirectory" id="sub-portfolio-2">
+                <td class="name indent">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23FF6B35' stroke-width='2'%3E%3Cpath d='M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z'/%3E%3Cpath d='M14 2v6h6M10 13l2 2 4-4'/%3E%3C/svg%3E" class="icon" alt="[FILE]">
+                    <a href="https://porto.adialamsyahardi.id/?as=tc">me as a Teacher</a>
+                </td>
+                <td class="modified">2026-02-10 17:12</td>
+                <td class="size">128K</td>
+                <td class="description" data-lang-en="This page providing my experience as a Teacher" data-lang-id="Halaman ini memuat pengalaman saya sebagai Guru">Portfolio Site</td>
+            </tr>
+
             <tr class="clickable" onclick="toggleSubdirectory('projects')">
                 <td class="name">
                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2'%3E%3Cpath d='M9 5l7 7-7 7'/%3E%3C/svg%3E" class="icon arrow" id="arrow-projects" alt="[>]">
@@ -383,7 +420,7 @@
                 </td>
                 <td class="modified">2026-02-10 14:22</td>
                 <td class="size">45K</td>
-                <td class="description" data-lang-en="This project builded With Laravel Framework" data-lang-id="Situs Portofolio">Portfolio Site</td>
+                <td class="description" data-lang-en="This project builded With Laravel Framework" data-lang-id="Projek ini dibangun dengan Framework Laravel">PHP Project</td>
             </tr>
 
             <tr class="subdirectory" id="sub-projects-2">
@@ -432,6 +469,13 @@
     <address id="serverInfo">
         Want to hire me 24/6? ( <a href="https://www.linkedin.com/in/adialamsyahardi" target="_blank">LinkedIn</a>, <a href="https://www.jobstreet.com" target="_blank">Jobstreet</a> ) Contact me at <a href="mailto:kontak@adialamsyahardi.id">kontak@adialamsyahardi.id</a> port 587
     </address>
+
+    <div class="gif-container">
+        <div class="gif-wrapper">
+            <iframe src="https://giphy.com/embed/s51SqVVt0Yuh6b6HL8" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        </div>
+        <p>via GIPHY</p>
+    </div>
 
     <!-- Modal for README.md -->
     <div class="modal-overlay" id="readmeModal">
